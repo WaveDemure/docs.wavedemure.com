@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome Extension Management Library</title>
+
+    <!-- Include Prism styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-okaidia.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2d2d2d;
+            color: #fff;
+            margin: 20px;
+        }
+
+        h2, h3 {
+            color: #61dafb;
+        }
+
+        code {
+            background-color: #393939;
+            color: #61dafb;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background-color: #393939;
+            color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Chrome Extension Management Library</h1>
+
+<h2>Overview</h2>
+
+<p>The Chrome Extension Management Library provides a set of functions for interacting with Chrome extensions.</p>
+
+<h2>Functions</h2>
+
+<h3><code>1. getAllExtensionNames(callback: Function)</code></h3>
+
+<p><strong>Description:</strong> Retrieves the names of all Chrome extensions installed in the browser.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+    <li><code>callback</code> (Function): A callback function that will be invoked with an array containing the names of all installed extensions.</li>
+</ul>
+
+<p><strong>Usage:</strong></p>
+<pre class="language-javascript"><code>// Include the function in your script:
+function getAllExtensionNames(callback) {
+    var exts = [];
+    chrome.management.getAll(function(extInfos) {
+        extInfos.forEach(function(ext) {
+            exts.push(ext.name);
+        });
+        callback(exts);
+    });
+}
+
+// Call the function with a callback:
+getAllExtensionNames(function(result) {
+    // Handle the result, e.g., display it using console.log
+    console.log(result);
+});
+</code></pre>
+
+<h3><code>2. getAllExtensionIds(callback: Function)</code></h3>
+
+<p><strong>Description:</strong> Retrieves the IDs of all Chrome extensions installed in the browser.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+    <li><code>callback</code> (Function): A callback function that will be invoked with an array containing the IDs of all installed extensions.</li>
+</ul>
+
+<p><strong>Usage:</strong></p>
+<pre class="language-javascript"><code>// Include the function in your script:
+function getAllExtensionIds(callback) {
+    var extsI = [];
+    chrome.management.getAll(function(extInfos) {
+        extInfos.forEach(function(ext) {
+            extsI.push(ext.id);
+        });
+        callback(extsI);
+    });
+}
+
+// Call the function with a callback:
+getAllExtensionIds(function(result) {
+    // Handle the result, e.g., display it using console.log
+    console.log(result);
+});
+</code></pre>
+
+<h3><code>3. detectBlockerExts()</code></h3>
+
+<p><strong>Description:</strong> Displays an alert indicating that the function is not yet implemented.</p>
+
+<p><strong>Usage:</strong></p>
+<pre class="language-javascript"><code>// Call the function:
+detectBlockerExts();
+</code></pre>
+
+<h3><code>4. disableExt(id: string)</code></h3>
+
+<p><strong>Description:</strong> Disables a Chrome extension with the specified ID.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+    <li><code>id</code> (string): The ID of the extension to be disabled.</li>
+</ul>
+
+<p><strong>Usage:</strong></p>
+<pre class="language-javascript"><code>// Include the function in your script:
+function disableExt(id) {
+    chrome.runtime.getBackgroundPage(function (p) {
+        p.chrome.management.setEnabled(id, false);
+    });
+}
+
+// Call the function with an extension ID:
+disableExt('your_extension_id');
+</code></pre>
+
+<h3><code>5. enableExt(id: string)</code></h3>
+
+<p><strong>Description:</strong> Enables a Chrome extension with the specified ID.</p>
+
+<p><strong>Parameters:</strong></p>
+<ul>
+    <li><code>id</code> (string): The ID of the extension to be enabled.</li>
+</ul>
+
+<p><strong>Usage:</strong></p>
+<pre class="language-javascript"><code>// Include the function in your script:
+function enableExt(id) {
+    chrome.runtime.getBackgroundPage(function (p) {
+        p.chrome.management.setEnabled(id, true);
+    });
+}
+
+// Call the function with an extension ID:
+enableExt('your_extension_id');
+</code></pre>
+
+<p><strong>Note:</strong> Make sure to replace <code>'your_extension_id'</code> with the actual ID of the extension you want to enable or disable.</p>
+
+<!-- Include Prism script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
+
+</body>
+</html>
